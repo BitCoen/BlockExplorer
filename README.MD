@@ -1,3 +1,8 @@
-# iZ³ Block Explorer
+# BitCoen Block Explorer
 
-Block digger for iZ³ (Izzzio) blockchain. Depends on Candy for blockchain connection.
+![BitCoen logo](https://bitcoen.io/img/one-logo.png)
+
+
+Block digger for BitCoen blockchain. Depends on Candy (https://github.com/Izzzio/Candy) for blockchain connection.
+
+Forked from https://github.com/Izzzio/BlockExplorer
