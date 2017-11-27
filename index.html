@@ -1,4 +1,9 @@
 <!DOCTYPE html>
+<!--
+iZ³ | Izzzio Blockchain explorer - izzz.io
+Forked from https://github.com/Izzzio/BlockExplorer for BitCoen project (bitcoen.io)
+@author: Andrey Nedobylsky (admin@twister-vl.ru)
+-->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -20,18 +25,7 @@
 
          <div class="collapse navbar-collapse" id="navbarsExampleDefault">
               <ul class="navbar-nav mr-auto">
-               <!--   <li class="nav-item active">
-                      <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                  </li>
-                  <li class="nav-item">
-                      <a class="nav-link" href="#">Settings</a>
-                  </li>
-                  <li class="nav-item">
-                      <a class="nav-link" href="#">Profile</a>
-                  </li>
-                  <li class="nav-item">
-                      <a class="nav-link" href="#">Help</a>
-                  </li> -->
+
               </ul>
               <form class="form-inline mt-2 mt-md-0 searchForm">
                   <input class="form-control mr-sm-2" id="search" type="text" placeholder="Block id or hash" aria-label="Search">
@@ -114,6 +108,11 @@
                                         <td class="text-right text-muted ng-binding blockTimestamp"></td>
                                     </tr>
 
+                                    <tr>
+                                        <td><strong><span>Start Timestamp</span></strong></td>
+                                        <td class="text-right text-muted ng-binding blockStartTimestamp"></td>
+                                    </tr>
+
 
                                     <tr class="">
                                         <td><strong><span>Previous Block</span></strong></td>
@@ -135,6 +134,11 @@
                                     <tr>
                                         <td><strong><span>Block type</span></strong></td>
                                         <td class="text-right text-muted ng-binding blockType"></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td><strong><span>Block sign</span></strong></td>
+                                        <td class="text-right text-muted ng-binding blockSign" style="overflow-x: scroll; max-width: 500px"></td>
                                     </tr>
 
                                     <tr>

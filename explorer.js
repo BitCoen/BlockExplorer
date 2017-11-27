@@ -5,7 +5,7 @@
 
 const maxBlocksOnPage = 15;
 
-var nodes = ['wss://xn--90absg.xn--p1ai/vitamin/', "ws://localhost:6001"];
+var nodes = [ "ws://localhost:6013"];
 var candy = null;
 var lastestBlocks = [];
 var parsers = {};
@@ -68,6 +68,7 @@ function startCandyConnection(nodes) {
     function hideModal() {
         $('#loadingModal').fadeOut(1000);
         $('.modal-backdrop').fadeOut(1000);
+        $('.modal-open').removeClass('modal-open');
     }
 
     candy = new Candy(nodes).start();
@@ -130,7 +131,9 @@ function loadBlockPreview(index) {
         $('.blockNext').text(rawBlock.index + 1);
         $('.blockType').text(blockType);
         $('.blockTimestamp').text(moment(rawBlock.timestamp).format('LLLL'));
+        $('.blockStartTimestamp').text(moment(rawBlock.startTimestamp).format('LLLL'));
         $('.blockData').text(rawBlock.data);
+        $('.blockSign').text(rawBlock.sign);
 
         if(typeof parsers[blockType] !== 'undefined') {
             $('.blockParserOutput').html(parsers[blockType](rawBlock));
@@ -178,7 +181,7 @@ function updateLatestBlocks() {
         for (var i = candy.blockHeight; i > candy.blockHeight - maxBlocksOnPage; i--) {
             candy.loadResource(i, function (err, block, rawBlock) {
                 lastestBlocks.push({id: rawBlock.index, raw: rawBlock, data: block});
-                if(lastestBlocks.length >= maxBlocksOnPage) {
+                if(lastestBlocks.length >= maxBlocksOnPage || lastestBlocks.length >= candy.blockHeight) {
                     lastBlocksTableFormat();
                 }
             });
