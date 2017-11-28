@@ -1,4 +1,6 @@
 [
-  "wss://xn--90absg.xn--p1ai/vitamin/",
-  "ws://localhost:6001"
+  "ws://localhost:6013",
+  "wss://node1.bitcoen.io",
+  "wss://node2.bitcoen.io",
+  "wss://node3.bitcoen.io"
 ]

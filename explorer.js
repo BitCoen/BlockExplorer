@@ -5,7 +5,7 @@
 
 const maxBlocksOnPage = 15;
 
-var nodes = [ "ws://localhost:6013"];
+var nodes = ["ws://localhost:6013", "wss://node1.bitcoen.io", "wss://node2.bitcoen.io", "wss://node3.bitcoen.io"];
 var candy = null;
 var lastestBlocks = [];
 var parsers = {};
