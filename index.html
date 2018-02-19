@@ -178,6 +178,13 @@ Forked from https://github.com/Izzzio/BlockExplorer for BitCoen project (bitcoen
 
 </div>
 
+<script>if(typeof module === 'object') {
+    window.module = module;
+    module = undefined;
+}</script>
+
+
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.1/moment.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"
         crossorigin="anonymous"></script>
@@ -193,9 +200,15 @@ Forked from https://github.com/Izzzio/BlockExplorer for BitCoen project (bitcoen
 <!-- Parsers -->
 <script src="parsers/CandyData.js"></script>
 <script src="parsers/Smart.js"></script>
-<script src="parsers/Transaction.js"></script>
+<script src="parsers/Transaction.js?_=123"></script>
 <script src="parsers/WalletRegister.js"></script>
 <!-- Parsers -->
+
+<!-- Insert this line after script imports -->
+<script>if(window.module) {
+    module = window.module;
+}</script>
+
 
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript" >
