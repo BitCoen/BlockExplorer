@@ -118,25 +118,25 @@ function Candy(nodeList) {
         }
 
         if(data.type === MessageType.BROADCAST) {
-            if(that._lastMsgIndex < data.index) {
-                if(data.reciver === that.recieverAddress) {
+            /*if(that._lastMsgIndex < data.index) {*/
+            if(data.reciver === that.recieverAddress) {
 
-                    if(data.id === 'CANDY_APP_RESPONSE') {
-                        if(typeof that._candyAppResponse === 'function') {
-                            that._candyAppResponse(data);
-                        }
-                    } else {
-                        if(typeof that.onmessage === 'function') {
-                            that.onmessage(data);
-                        }
+                if(data.id === 'CANDY_APP_RESPONSE') {
+                    if(typeof that._candyAppResponse === 'function') {
+                        that._candyAppResponse(data);
                     }
                 } else {
-                    if(data.recepient !== that.recieverAddress) {
-                        data.TTL++;
-                        that.broadcast(data);
+                    if(typeof that.onmessage === 'function') {
+                        that.onmessage(data);
                     }
                 }
+            } else {
+                if(data.recepient !== that.recieverAddress) {
+                    data.TTL++;
+                    that.broadcast(data);
+                }
             }
+            /*}*/
             that._lastMsgIndex = data.index;
             that._lastMsgTimestamp = data.timestamp;
         }
@@ -165,7 +165,12 @@ function Candy(nodeList) {
      * @param {String} peer
      */
     this.connectPeer = function (peer) {
-        let socket = new WebSocket(peer);
+        let socket = null;
+        try {
+            socket = new WebSocket(peer);
+        } catch (e) {
+            return;
+        }
         socket.onopen = function () {
             setTimeout(function () {
                 if(typeof that.onready !== 'undefined') {
@@ -238,7 +243,8 @@ function Candy(nodeList) {
             id: id,
             timestamp: (new Date().getTime()),
             TTL: 0,
-            index: that._lastMsgIndex
+            index: that._lastMsgIndex,
+            mutex: this.getid() + this.getid() + this.getid()
         };
         if(!that.broadcast(message)) {
             that.autoconnect(true);
@@ -291,14 +297,16 @@ function Candy(nodeList) {
      * @param uri
      * @param requestData
      * @param {string} backId
+     * @param {int} timeout
      */
-    this._candyAppRequest = function (uri, requestData, backId) {
+    this._candyAppRequest = function (uri, requestData, backId, timeout) {
         let url = document.createElement('a');
         url.href = uri.replace('candy:', 'http:');
         let data = {
             uri: uri,
             data: requestData,
-            backId: backId
+            backId: backId,
+            timeout: timeout
         };
         this.broadcastMessage(data, 'CANDY_APP', url.host, that.recieverAddress);
     };
@@ -313,6 +321,7 @@ function Candy(nodeList) {
             clearTimeout(request.timer);
             request.callback(message.err, typeof message.data.data.body !== 'undefined' ? message.data.data.body : message.data.data, message);
             that._requestQueue[message.data.backId] = undefined;
+            delete that._requestQueue[message.data.backId];
         }
     };
 
@@ -344,7 +353,7 @@ function Candy(nodeList) {
             timer: timer
         };
 
-        that._candyAppRequest(uri, data, requestId);
+        that._candyAppRequest(uri, data, requestId, timeout);
 
         return that._requestQueue[requestId];
     };

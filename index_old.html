@@ -10,7 +10,7 @@ Forked from https://github.com/Izzzio/BlockExplorer for BitCoen project (bitcoen
     <title>BitCoen Blockchain Explorer</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
           integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-    <link rel="stylesheet" href="explorer.css?_=126">
+    <link rel="stylesheet" href="explorer.css">
 </head>
 <body>
 
@@ -65,72 +65,6 @@ Forked from https://github.com/Izzzio/BlockExplorer for BitCoen project (bitcoen
                     </table>
                 </div>
             </div>
-
-            <div id="walletDetailPage" style="display: none">
-            <div class="row">
-                <div class="col-md-4">
-                    <h2>Wallet <span class="walletId">0</span></h2>
-                </div>
-                <div class="col-md-6"></div>
-                <div class="col-md-2">
-                    <a href="#" class="btn  btn-secondary btn-block returnButton">Return</a>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-1"></div>
-                <div class="col-md-10"><br>
-
-                    <h2>Summary</h2>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <table class="table" style="table-layout: fixed">
-                                <tbody>
-                                <tr>
-                                    <td><strong><span>Balance</span></strong></td>
-                                    <td class="text-right text-muted"><span class="walletBalance">0</span></td>
-                                </tr>
-
-                                <tr class="">
-                                    <td><strong><span>Created in block</span></strong></td>
-                                    <td class="text-right"><a href="#" class="blockHref walletBlock"></a></td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="col-md-6">
-                            <table class="table">
-                                <tbody>
-
-
-                                <tr>
-                                    <td><strong><span>Full address</span></strong></td>
-                                    <td class="text-right text-muted ng-binding fullAddress" style="overflow-x: scroll; max-width: 500px"></td>
-                                </tr>
-
-                                <tr>
-                                    <td><strong><span>Total transactions</span></strong></td>
-                                    <td class="text-right totalTx"></td>
-                                </tr>
-
-
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <h2>Public key</h2>
-                    <div class="col-md-12" style="overflow-x: scroll">
-                        <code class="public"></code>
-                    </div>
-                    <br>
-                    <h2>Transactions</h2>
-                    <div class="txs">
-
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
 
             <div id="blockDetailPage" style="display: none">
                 <div class="row">
@@ -262,7 +196,7 @@ Forked from https://github.com/Izzzio/BlockExplorer for BitCoen project (bitcoen
         crossorigin="anonymous"></script>
 <script src="https://raw.githubusercontent.com/VitaminBlockchain/Candy/master/candy.js"></script>
 <script src="candy.js?_=1"></script>
-<script src="explorer.js?_=159"></script>
+<script src="explorer.js?_=131"></script>
 <!-- Parsers -->
 <script src="parsers/CandyData.js"></script>
 <script src="parsers/Smart.js"></script>

@@ -110,3 +110,13 @@ h1 {
 .btn-dark-green:active {
     background-color: #57bda1;
 }
+
+.transactionsTable{
+    text-align: center;
+    line-height: 40px;
+    border-collapse: collapse;
+}
+
+.transactionsTable tr:nth-child(even){background-color: #f2f2f2;}
+
+.transactionsTable tr:hover {background-color: #e4e4e4;}
