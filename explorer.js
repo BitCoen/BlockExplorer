@@ -5,7 +5,7 @@
 
 const maxBlocksOnPage = 15;
 
-var nodes = ["wss://bitcoen.io/blockchain/", "ws://localhost:6013","ws://node1.bitcoen.io:6013", "ws://node2.bitcoen.io:6013", "ws://node3.bitcoen.io:6013", "ws://node4.bitcoen.io:6013" ];
+var nodes = ["wss://bitcoen.io/blockchain/", "ws://localhost:6013", "ws://node1.bitcoen.io:6013", "ws://node2.bitcoen.io:6013", "ws://node3.bitcoen.io:6013", "ws://node4.bitcoen.io:6013"];
 var candy = null;
 var lastestBlocks = [];
 var parsers = {};
@@ -27,6 +27,7 @@ $(document).ready(function () {
         event.preventDefault();
         var search = $('#search').val();
         if(!isNaN(search)) {
+
             loadBlockPreview(search);
         } else {
             if(confirm('Search by hash may take a long time. Are you sure?')) {
@@ -58,6 +59,7 @@ $(document).ready(function () {
         }
     });
 
+
 });
 
 /**
@@ -75,6 +77,7 @@ function startCandyConnection(nodes) {
 
     candy.onready = function () {
 
+
         setInterval(function () {
             $('#height').text(candy.blockHeight);
             $('#connections').text(candy.getActiveConnections().length);
@@ -90,6 +93,13 @@ function startCandyConnection(nodes) {
             updateLatestBlocks();
         }, 5000);
         updateLatestBlocks();
+
+        setTimeout(function () {
+            if(window.location.hash.length !== 0) {
+                $('#search').val(window.location.hash.replace('#', ''));
+                $('.searchForm').submit();
+            }
+        }, 1000);
 
     };
 }
@@ -119,6 +129,7 @@ function detectBlockType(rawBlock) {
 function loadBlockPreview(index) {
     index = (isNaN(index) ? $(this).text() : index);
     candy.loadResource(index, function (err, block, rawBlock) {
+        window.location.hash = index;
         var blockType = detectBlockType(rawBlock);
         $('#lastestBlocksPage').hide();
         $('#blockDetailPage').fadeIn();
@@ -152,6 +163,7 @@ function loadBlockPreview(index) {
 function updateLatestBlocks() {
 
     function lastBlocksTableFormat() {
+
         function insertBlock(rawBlock) {
             return $('#lastTransactions tbody > tr:last').after(
                 "                    <tr>\n" +
@@ -182,6 +194,9 @@ function updateLatestBlocks() {
             candy.loadResource(i, function (err, block, rawBlock) {
                 lastestBlocks.push({id: rawBlock.index, raw: rawBlock, data: block});
                 if(lastestBlocks.length >= maxBlocksOnPage || lastestBlocks.length >= candy.blockHeight) {
+                    lastestBlocks = lastestBlocks.sort(function (b1, b2) {
+                        return (b2.id - b1.id)
+                    });
                     lastBlocksTableFormat();
                 }
             });
